@@ -23,9 +23,8 @@ html, body {
 }
 
 body {
-    /* Adjust for iPhone's safe area to avoid overlap with notch */
-    padding-top: env(safe-area-inset-top, 20px); /* Safe area handling for iPhone X */
-    padding-bottom: env(safe-area-inset-bottom, 20px); /* Safe area for bottom */
+    /* The background color will extend to the top including the notch area */
+    background-color: #121214; /* Solid color for the top notch area */
     height: 100vh; /* Use full height */
     width: 100vw; /* Ensure full viewport width */
     display: flex;
