@@ -8,7 +8,7 @@
 body {
     font-family: Myriad Pro Semibold, sans-serif;
     background: linear-gradient(45deg, #1c0818, #121214, #2a2c30); /* Initial gradient */
-    background-size: 400% 400%; /* Make the gradient large enough to animate */
+    background-size: 400% 400%; /* Default gradient size */
     animation: gradientAnimation 10s ease infinite; /* Apply the animation */
     color: white;
     display: flex;
@@ -19,6 +19,7 @@ body {
     padding: 20px;
 }
 
+/* Default Gradient Animation */
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
@@ -31,11 +32,11 @@ body {
     }
 }
 
-/* Media Query for mobile screens (max-width: 767px) */
-@media (max-width: 767px) {
+/* Media Query for mobile screens (portrait iPhone and similar devices) */
+@media (max-width: 767px) and (orientation: portrait) {
     body {
-        background-size: 600% 600%; /* Increase the size of the gradient on mobile */
-        animation: gradientAnimation 8s ease infinite; /* Speed up the animation */
+        background-size: 800% 800%; /* Increase the size of the gradient for better visibility */
+        animation: gradientAnimation 6s ease infinite; /* Speed up the animation */
     }
 }
 
