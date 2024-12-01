@@ -31,6 +31,14 @@ body {
     }
 }
 
+/* Media Query for mobile screens (max-width: 767px) */
+@media (max-width: 767px) {
+    body {
+        background-size: 600% 600%; /* Increase the size of the gradient on mobile */
+        animation: gradientAnimation 8s ease infinite; /* Speed up the animation */
+    }
+}
+
 /* Main container styling */
 .container {
     max-width: 400px;
