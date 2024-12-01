@@ -7,6 +7,7 @@
 
 html, body {
     height: 100%;
+    width: 100%;
     font-family: Myriad Pro Semibold, sans-serif;
     background: linear-gradient(45deg, #1c0818, #121214, #2a2c30); /* Initial gradient */
     background-size: 400% 400%; /* Make the gradient large enough to animate */
@@ -16,15 +17,23 @@ html, body {
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding: 0; /* Reset default padding */
+    padding: 0;
+    margin: 0;
+    overflow: hidden; /* Prevents overflow */
 }
 
 body {
+    /* Adjust for iPhone's safe area to avoid overlap with notch */
     padding-top: env(safe-area-inset-top, 20px); /* Safe area handling for iPhone X */
     padding-bottom: env(safe-area-inset-bottom, 20px); /* Safe area for bottom */
+    height: 100vh; /* Use full height */
+    width: 100vw; /* Ensure full viewport width */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Fix for the top bar */
 }
 
-/* Gradient animation */
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
