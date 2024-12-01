@@ -1,186 +1,201 @@
-/* Reset and basic styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timer App</title>
+    <!-- Include Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Reset and basic styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-body {
-    font-family: Myriad Pro Semibold, sans-serif;
-    background: linear-gradient(45deg, #1c0818, #121214, #2a2c30); /* Initial gradient */
-    background-size: 400% 400%; /* Make the gradient large enough to animate */
-    animation: gradientAnimation 10s ease infinite; /* Apply the animation */
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    text-align: center;
-    padding: 20px;
-}
+        body {
+            font-family: Myriad Pro Semibold, sans-serif;
+            background: linear-gradient(45deg, #1c0818, #121214, #2a2c30); /* Initial gradient */
+            background-size: 400% 400%; /* Make the gradient large enough to animate */
+            animation: gradientAnimation 10s ease infinite; /* Apply the animation */
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            padding: 20px;
+        }
 
-@keyframes gradientAnimation {
-    0% {
-        background-position: 0% 50%;
-    }
-    50% {
-        background-position: 100% 50%;
-    }
-    100% {
-        background-position: 0% 50%;
-    }
-}
+        @keyframes gradientAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
 
-/* Main container styling */
-.container {
-    max-width: 400px;
-    width: 100%;
-    background-color: rgba(29, 29, 29, 0.3);  /* Dark background with 80% opacity */
-    border-radius: 30px;
-    padding: 40px 30px; /* Adjusted padding for better spacing */
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
-}
+        /* Main container styling */
+        .container {
+            max-width: 400px;
+            width: 100%;
+            background-color: rgba(29, 29, 29, 0.3);  /* Dark background with 80% opacity */
+            border-radius: 30px;
+            padding: 40px 30px; /* Adjusted padding for better spacing */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
 
-/* Header styling */
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 30px; /* Increased spacing for breathing room */
-}
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px; /* Increased spacing for breathing room */
+        }
 
-/* General input container styling */
-.inputs {
-    margin-bottom: 25px; /* Increased space between input sections */
-}
+        .inputs {
+            margin-bottom: 25px; /* Increased space between input sections */
+        }
 
-.inputs label {
-    font-size: 1.2rem; /* Slightly larger font for better readability */
-    margin-bottom: 8px; /* Increased spacing below labels */
-    display: block;
-}
+        .inputs label {
+            font-size: 1.2rem; /* Slightly larger font for better readability */
+            margin-bottom: 8px; /* Increased spacing below labels */
+            display: block;
+        }
 
-/* Input fields styling */
-.inputs input,
-.inputs select {
-    padding: 12px; /* Increased padding for a balanced look */
-    font-size: 1.2rem; /* Larger font for consistency */
-    font-weight: bold; /* Make input numbers bold */
-    border: 1px solid #555;
-    background-color: transparent; /* Fully transparent background */
-    color: white;
-    margin-bottom: 2.5px; /* More space between inputs */
-    border-radius: 15px;
-}
+        /* Input fields styling */
+        .inputs input,
+        .inputs select {
+            padding: 12px; /* Increased padding for a balanced look */
+            font-size: 1.2rem; /* Larger font for consistency */
+            border: 1px solid #555;
+            background-color: transparent; /* Fully transparent background */
+            color: white;
+            margin-bottom: 2.5px; /* More space between inputs */
+            border-radius: 15px;
+            width: 100%; /* Ensure full width of inputs */
+        }
 
-/* Remove spinners on numeric inputs */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
+        .time-input-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            position: relative;
+        }
 
-input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
-}
+        #timeUnitDisplay {
+            font-size: 1.2rem;
+            padding: 6px;
+            cursor: pointer;
+            background-color: transparent;
+            border-radius: 10px;
+            color: white;
+            text-align: center;
+            width: 40px;
+            position: absolute;
+            right: 0;
+            transform: translateX(-20px);
+        }
 
-/* Adjusting input fields for number of frames and time per frame */
-.inputs input {
-    width: 160px; /* Slightly wider input fields */
-    text-align: center; /* Center align the text inside inputs */
-}
+        #timeUnitDisplay:hover {
+            background-color: #444;
+        }
 
-/* Flexbox container for time per frame input and unit display */
-.time-input-container {
-    display: flex;
-    justify-content: center; /* Center-align the entire group */
-    align-items: center; /* Vertically align elements */
-    gap: 15px; /* Increased gap for better spacing */
-    width: 100%; /* Ensure full container width */
-    position: relative; /* Enable absolute positioning for adjustments */
-}
+        .timer p {
+            font-size: 5.5rem;
+            margin-top: 40px;
+            margin-bottom: 40px;
+        }
 
-/* Styling for the input field */
-.time-input-container input {
-    width: 160px; /* Adjust width for visual consistency */
-    text-align: center; /* Center-align the input text */
-}
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-top: 40px;
+        }
 
-/* Styling for the unit display (dropdown or text) */
-#timeUnitDisplay {
-    font-size: 1.2rem; /* Slightly larger text for visibility */
-    padding: 6px;
-    cursor: pointer;
-    background-color: transparent;
-    border-radius: 10px;
-    color: white;
-    text-align: center;
-    width: 40px; /* Adjusted width for proportion */
-    position: absolute; /* Position the dropdown */
-    right: 0; /* Align it to the far right of the container */
-    transform: translateX(-20px); /* Adjusted spacing for alignment */
-}
+        .controls button {
+            background-color: transparent;
+            color: white;
+            border: 1px solid #555;
+            padding: 15px 20px;
+            font-size: 1.4rem;
+            cursor: pointer;
+            width: 45%;
+            border-radius: 15px;
+            transition: background-color 0.3s;
+        }
 
-#timeUnitDisplay:hover {
-    background-color: #444;
-}
+        .controls button i {
+            font-size: 1.2rem;
+        }
 
-/* Timer display */
-.timer p {
-    font-size: 5.5rem;
-    margin-top: 40px; /* Increased margin above the timer */
-    margin-bottom: 40px; /* Added margin below the timer for consistent spacing */
-}
+        .controls button:hover {
+            background-color: rgba(51, 51, 51, 0.5);
+        }
 
-/* General input container styling */
-.inputs {
-    margin-bottom: 30px; /* Increased space between input sections */
-}
+        .controls button:disabled {
+            background-color: #555;
+            cursor: not-allowed;
+        }
 
-/* Controls container styling */
-.controls {
-    display: flex;
-    justify-content: center;
-    gap: 25px; /* Wider gap between buttons for visual balance */
-    margin-top: 40px; /* More space above buttons to balance with the timer */
-}
+        /* Safe area handling for iPhone X and newer */
+        body {
+            padding-bottom: env(safe-area-inset-bottom);
+            padding-top: env(safe-area-inset-top);
+        }
 
-/* Button styling */
-.controls button {
-    background-color: transparent; /* Fully transparent background */
-    color: white;
-    border: 1px solid #555;
-    padding: 15px 20px; /* Adjusted padding for a better feel */
-    font-size: 1.4rem; /* Consistent button font size */
-    cursor: pointer;
-    width: 45%; /* Adjust width of buttons */
-    border-radius: 15px;
-    transition: background-color 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+        /* Ensuring full height on mobile */
+        html, body {
+            height: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Frame Timer</h1>
 
-.controls button i {
-    font-size: 1.2rem; /* Slightly larger icons */
-}
+        <!-- Input for number of frames -->
+        <div class="inputs">
+            <label for="frames">Number of Frames</label>
+            <input type="number" id="frames" value="250" min="1">
+        </div>
 
-.controls button:hover {
-    background-color: rgba(51, 51, 51, 0.5); /* Add a slight background on hover */
-}
+        <!-- Time per frame input and unit selection -->
+        <div class="inputs">
+            <label for="time">Time per frame</label>
+            <div class="time-input-container">
+                <input type="number" id="time" value="1" min="1" step="0.1">
+                <span id="timeUnitDisplay" class="unit-display" onclick="toggleUnit()">S</span>
+            </div>
+        </div>
 
-.controls button:disabled {
-    background-color: #555;
-    cursor: not-allowed;
-}
+        <!-- Timer display -->
+        <div class="timer">
+            <p id="timerDisplay" style="display:none">0</p>
+        </div>
 
-/* Remove the arrow from the select dropdown if used */
-#timeUnit {
-    -webkit-appearance: none; /* Chrome, Safari */
-    -moz-appearance: none;    /* Firefox */
-    -ms-appearance: none;     /* Internet Explorer */
-    appearance: none;         /* Standard syntax */
-}
+        <!-- Start/Pause and Stop buttons with icons -->
+        <div class="controls">
+            <button id="startPauseButton"><i class="fas fa-play"></i></button>
+            <button id="stopButton" disabled><i class="fas fa-stop"></i></button>
+        </div>
+    </div>
 
-/* Hide the select dropdown visually (if needed) */
-.hidden {
-    display: none;
-}
+    <script>
+        // Toggle the unit between seconds and minutes
+        function toggleUnit() {
+            var unitDisplay = document.getElementById("timeUnitDisplay");
+            if (unitDisplay.textContent === "S") {
+                unitDisplay.textContent = "M";
+            } else {
+                unitDisplay.textContent = "S";
+            }
+        }
+    </script>
+    <script src="script.js"></script>
+</body>
+</html>
