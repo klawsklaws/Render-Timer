@@ -5,20 +5,26 @@
     box-sizing: border-box;
 }
 
-body {
+html, body {
+    height: 100%;
     font-family: Myriad Pro Semibold, sans-serif;
     background: linear-gradient(45deg, #1c0818, #121214, #2a2c30); /* Initial gradient */
     background-size: 400% 400%; /* Make the gradient large enough to animate */
-    animation: gradientAnimation 10s ease infinite; /* Apply the animation */
+    animation: gradientAnimation 10s ease infinite;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
     text-align: center;
-    padding: 20px;
+    padding: 0; /* Reset default padding */
 }
 
+body {
+    padding-top: env(safe-area-inset-top, 20px); /* Safe area handling for iPhone X */
+    padding-bottom: env(safe-area-inset-bottom, 20px); /* Safe area for bottom */
+}
+
+/* Gradient animation */
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
@@ -37,86 +43,60 @@ body {
     width: 100%;
     background-color: rgba(29, 29, 29, 0.7);  /* Dark background with 70% opacity */
     border-radius: 30px;
-    padding: 40px 30px; /* Adjusted padding for better spacing */
+    padding: 40px 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 /* Header styling */
 h1 {
     font-size: 2.5rem;
-    margin-bottom: 30px; /* Increased spacing for breathing room */
+    margin-bottom: 30px;
 }
 
-/* General input container styling */
+/* Input container styling */
 .inputs {
-    margin-bottom: 25px; /* Increased space between input sections */
-}
-
-.inputs label {
-    font-size: 1.2rem; /* Slightly larger font for better readability */
-    margin-bottom: 8px; /* Increased spacing below labels */
-    display: block;
+    margin-bottom: 25px;
 }
 
 /* Input fields styling */
 .inputs input,
 .inputs select {
-    padding: 12px; /* Increased padding for a balanced look */
-    font-size: 1.2rem; /* Larger font for consistency */
-    font-weight: bold; /* Make input numbers bold */
+    padding: 12px;
+    font-size: 1.2rem;
+    font-weight: bold;
     border: 1px solid #555;
-    background-color: transparent; /* Fully transparent background */
+    background-color: transparent;
     color: white;
-    margin-bottom: 2.5px; /* More space between inputs */
+    margin-bottom: 2.5px;
     border-radius: 15px;
 }
 
-/* Remove spinners on numeric inputs */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
-}
-
-/* Adjusting input fields for number of frames and time per frame */
 .inputs input {
-    width: 160px; /* Slightly wider input fields */
-    text-align: center; /* Center align the text inside inputs */
+    width: 160px;
+    text-align: center;
 }
 
-/* Flexbox container for time per frame input and unit display */
 .time-input-container {
     display: flex;
-    justify-content: center; /* Center-align the entire group */
-    align-items: center; /* Vertically align elements */
-    gap: 15px; /* Increased gap for better spacing */
-    width: 100%; /* Ensure full container width */
-    position: relative; /* Enable absolute positioning for adjustments */
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    position: relative;
 }
 
-/* Styling for the input field */
-.time-input-container input {
-    width: 160px; /* Adjust width for visual consistency */
-    text-align: center; /* Center-align the input text */
-}
-
-/* Styling for the unit display (dropdown or text) */
 #timeUnitDisplay {
-    font-size: 1.2rem; /* Slightly larger text for visibility */
+    font-size: 1.2rem;
     padding: 6px;
     cursor: pointer;
     background-color: transparent;
     border-radius: 10px;
     color: white;
     text-align: center;
-    width: 40px; /* Adjusted width for proportion */
-    position: absolute; /* Position the dropdown */
-    right: 0; /* Align it to the far right of the container */
-    transform: translateX(-20px); /* Adjusted spacing for alignment */
+    width: 40px;
+    position: absolute;
+    right: 0;
+    transform: translateX(-20px);
 }
 
 #timeUnitDisplay:hover {
@@ -126,32 +106,27 @@ input[type="number"] {
 /* Timer display */
 .timer p {
     font-size: 5.5rem;
-    margin-top: 40px; /* Increased margin above the timer */
-    margin-bottom: 40px; /* Added margin below the timer for consistent spacing */
-}
-
-/* General input container styling */
-.inputs {
-    margin-bottom: 30px; /* Increased space between input sections */
+    margin-top: 40px;
+    margin-bottom: 40px;
 }
 
 /* Controls container styling */
 .controls {
     display: flex;
     justify-content: center;
-    gap: 25px; /* Wider gap between buttons for visual balance */
-    margin-top: 40px; /* More space above buttons to balance with the timer */
+    gap: 25px;
+    margin-top: 40px;
 }
 
 /* Button styling */
 .controls button {
-    background-color: transparent; /* Fully transparent background */
+    background-color: transparent;
     color: white;
     border: 1px solid #555;
-    padding: 15px 20px; /* Adjusted padding for a better feel */
-    font-size: 1.4rem; /* Consistent button font size */
+    padding: 15px 20px;
+    font-size: 1.4rem;
     cursor: pointer;
-    width: 45%; /* Adjust width of buttons */
+    width: 45%;
     border-radius: 15px;
     transition: background-color 0.3s;
     display: flex;
@@ -159,39 +134,11 @@ input[type="number"] {
     align-items: center;
 }
 
-.controls button i {
-    font-size: 1.2rem; /* Slightly larger icons */
-}
-
 .controls button:hover {
-    background-color: rgba(51, 51, 51, 0.5); /* Add a slight background on hover */
+    background-color: rgba(51, 51, 51, 0.5);
 }
 
 .controls button:disabled {
     background-color: #555;
     cursor: not-allowed;
-}
-
-/* Remove the arrow from the select dropdown if used */
-#timeUnit {
-    -webkit-appearance: none; /* Chrome, Safari */
-    -moz-appearance: none;    /* Firefox */
-    -ms-appearance: none;     /* Internet Explorer */
-    appearance: none;         /* Standard syntax */
-}
-
-/* Hide the select dropdown visually (if needed) */
-.hidden {
-    display: none;
-}
-
-/* Safe area handling for iPhone X and newer */
-body {
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-top: env(safe-area-inset-top);
-}
-
-/* Ensuring full height on mobile */
-html, body {
-    height: 100%;
 }
