@@ -8,6 +8,7 @@ let finishTimeDisplay = document.getElementById('finishTimeDisplay');
 let remainingTime;
 let timer;
 let isRunning = false;
+let isPaused = false;
 let currentUnit = 'seconds';  // Default to seconds
 
 // Toggle between "S" and "M" when the user clicks the unit display
@@ -46,6 +47,8 @@ function startTimer() {
     remainingTime = totalTimeInSeconds * framesInput.value;
 
     isRunning = true;
+    isPaused = false;
+
     startPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
     stopButton.disabled = false;
     startPauseButton.disabled = false;
@@ -67,12 +70,14 @@ function startTimer() {
 function pauseTimer() {
     clearInterval(timer);
     isRunning = false;
+    isPaused = true;
     startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
 }
 
 function stopTimer() {
     clearInterval(timer);
     isRunning = false;
+    isPaused = false;
     remainingTime = 0;
     updateDisplay(remainingTime);
     startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
@@ -94,24 +99,24 @@ function updateDisplay(time) {
 
     timerDisplay.style.display = 'block';
 
-    // Calculate finish time
+    // Calculate the finish time
     let finishTime = new Date(Date.now() + remainingTime * 1000); // Convert seconds to milliseconds
     let hoursFinish = finishTime.getHours();
     let minutesFinish = finishTime.getMinutes();
+    let dayOfWeek = finishTime.toLocaleString('en-US', { weekday: 'long' });
     let timeSuffix = hoursFinish >= 12 ? 'PM' : 'AM';
     hoursFinish = hoursFinish % 12 || 12; // Convert to 12-hour format
 
-    let currentDate = new Date();
-    let finishDate = finishTime;
-
-    // Display finish time correctly
-    if (finishDate.toDateString() === currentDate.toDateString()) {
-        // If finish time is today
+    // Check if the finish time is today or tomorrow
+    if (finishTime.getDate() === new Date().getDate()) {
+        // Display the finish time today
         finishTimeDisplay.textContent = `Finish time: ${hoursFinish}:${minutesFinish.toString().padStart(2, '0')} ${timeSuffix}`;
         finishTimeDisplay.style.display = 'block';
-    } else {
-        // If finish time is tomorrow
+    } else if (finishTime.getDate() > new Date().getDate()) {
+        // Display the finish time tomorrow
         finishTimeDisplay.textContent = `Finish time: ${hoursFinish}:${minutesFinish.toString().padStart(2, '0')} ${timeSuffix} (Tomorrow)`;
         finishTimeDisplay.style.display = 'block';
+    } else {
+        finishTimeDisplay.style.display = 'none'; // In case of other situations, hide it
     }
 }
