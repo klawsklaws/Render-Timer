@@ -102,16 +102,18 @@ function updateDisplay(time) {
     hoursFinish = hoursFinish % 12 || 12; // Convert to 12-hour format
 
     let currentDate = new Date();
-    let finishDate = finishTime;
+    let finishDate = new Date(finishTime);
 
     // Display finish time correctly
     if (finishDate.toDateString() === currentDate.toDateString()) {
         // If finish time is today
         finishTimeDisplay.textContent = `Finish time: ${hoursFinish}:${minutesFinish.toString().padStart(2, '0')} ${timeSuffix}`;
         finishTimeDisplay.style.display = 'block';
-    } else {
+    } else if (finishDate.getDate() === currentDate.getDate() + 1) {
         // If finish time is tomorrow
         finishTimeDisplay.textContent = `Finish time: ${hoursFinish}:${minutesFinish.toString().padStart(2, '0')} ${timeSuffix} (Tomorrow)`;
         finishTimeDisplay.style.display = 'block';
+    } else {
+        finishTimeDisplay.style.display = 'none';  // Hide if not today or tomorrow
     }
 }
