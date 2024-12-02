@@ -8,6 +8,7 @@ let finishTimeDisplay = document.getElementById('finishTimeDisplay');
 let remainingTime;
 let timer;
 let isRunning = false;
+let isPaused = false;
 let currentUnit = 'seconds';  // Default to seconds
 
 // Toggle between "S" and "M" when the user clicks the unit display
@@ -23,6 +24,17 @@ function toggleUnit() {
 
 startPauseButton.addEventListener('click', toggleTimer);
 stopButton.addEventListener('click', stopTimer);
+
+// Add a keydown event listener to the timeInput field to trigger the start when Enter is pressed
+timeInput.addEventListener('keydown', function(event) {
+    if (event.key === 'Enter') {
+        // Prevent the default action of the Enter key (form submission or other actions)
+        event.preventDefault();
+        
+        // Trigger the start of the timer when Enter is pressed
+        toggleTimer();
+    }
+});
 
 function toggleTimer() {
     if (isRunning) {
@@ -46,6 +58,8 @@ function startTimer() {
     remainingTime = totalTimeInSeconds * framesInput.value;
 
     isRunning = true;
+    isPaused = false;
+
     startPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
     stopButton.disabled = false;
     startPauseButton.disabled = false;
@@ -67,12 +81,14 @@ function startTimer() {
 function pauseTimer() {
     clearInterval(timer);
     isRunning = false;
+    isPaused = true;
     startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
 }
 
 function stopTimer() {
     clearInterval(timer);
     isRunning = false;
+    isPaused = false;
     remainingTime = 0;
     updateDisplay(remainingTime);
     startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
@@ -94,32 +110,26 @@ function updateDisplay(time) {
 
     timerDisplay.style.display = 'block';
 
-    // Calculate finish time
+    // Calculate the finish time
     let finishTime = new Date(Date.now() + remainingTime * 1000); // Convert seconds to milliseconds
     let hoursFinish = finishTime.getHours();
     let minutesFinish = finishTime.getMinutes();
+    let dayOfWeek = finishTime.toLocaleString('en-US', { weekday: 'long' });
+    hoursFinish = hoursFinish % 24; // Ensure 24-hour format
 
-    // No AM/PM, 24-hour format
-    hoursFinish = hoursFinish.toString().padStart(2, '0');
-    minutesFinish = minutesFinish.toString().padStart(2, '0');
-
-    let currentDate = new Date();
-    let finishDate = new Date(finishTime);
-
-    // Resetting the time part to midnight to compare only the dates
-    currentDate.setHours(0, 0, 0, 0);
-    finishDate.setHours(0, 0, 0, 0);
-
-    // Display finish time correctly
-    if (finishDate.getTime() === currentDate.getTime()) {
-        // If finish time is today
-        finishTimeDisplay.textContent = `Finish time: ${hoursFinish}:${minutesFinish}`;
-        finishTimeDisplay.style.display = 'block';
-    } else if (finishDate.getDate() === currentDate.getDate() + 1) {
-        // If finish time is tomorrow
-        finishTimeDisplay.textContent = `Finish time: ${hoursFinish}:${minutesFinish} (Tomorrow)`;
-        finishTimeDisplay.style.display = 'block';
-    } else {
-        finishTimeDisplay.style.display = 'none';  // Hide if not today or tomorrow
+    let displayText = `Finish Time: ${hoursFinish}:${minutesFinish.toString().padStart(2, '0')}`;
+    
+    if (finishTime.getDate() !== new Date().getDate()) {
+        if (finishTime.getDate() > new Date().getDate()) {
+            let futureDate = finishTime.toLocaleDateString();
+            if (finishTime.getDay() === (new Date()).getDay() + 1) {
+                displayText += ` (Tomorrow)`;
+            } else {
+                displayText += ` (${dayOfWeek})`;
+            }
+        }
     }
+    
+    finishTimeDisplay.textContent = displayText;
+    finishTimeDisplay.style.display = 'block';
 }
