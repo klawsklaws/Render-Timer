@@ -115,12 +115,17 @@ function updateFinishTimeDisplay() {
 
     let finishTimeDisplay = document.getElementById("finishTimeDisplay");
 
+    // Convert to 12-hour format with AM/PM
+    let timeSuffix = hours >= 12 ? 'PM' : 'AM';
+    hours = hours % 12;
+    if (hours === 0) hours = 12; // Handle midnight and noon
+
     // Check if the finish time is today or tomorrow
     if (currentDay === finishDay) {
         // Today
-        finishTimeDisplay.textContent = `Finish Time: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        finishTimeDisplay.textContent = `Finish Time: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${timeSuffix}`;
     } else {
         // Tomorrow
-        finishTimeDisplay.textContent = `Finish Time (Tomorrow): ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+        finishTimeDisplay.textContent = `Finish Time (Tomorrow): ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${timeSuffix}`;
     }
 }
