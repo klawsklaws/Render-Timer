@@ -237,11 +237,23 @@ html, body {
 
 /* Footer styling */
 footer {
-    font-size: 0.1rem;
+    font-size: 0.9rem; /* Slightly smaller font size for mobile readability */
     color: #aaa;
     text-align: center;
-    padding: 10px 0; /* Add some padding for visual spacing */
+    padding: 10px 0; /* Padding for spacing */
     position: fixed; /* Fixed at the bottom of the screen */
     bottom: 0;
     width: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Add a background for better visibility on light content */
+    z-index: 10; /* Ensure it appears above other content if overlapping */
 }
+
+/* Responsive design for footer */
+@media (max-width: 600px) {
+    footer {
+        font-size: 0.8rem; /* Reduce font size further for smaller screens */
+        padding: 8px 5px; /* Adjust padding for smaller screens */
+        line-height: 1.2; /* Adjust line height for better fit */
+    }
+}
+
