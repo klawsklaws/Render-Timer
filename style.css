@@ -18,6 +18,7 @@ body {
     text-align: center;
     padding: 20px;
     flex-direction: column; /* Change flex direction to column to stack content vertically */
+    overflow: hidden; /* Prevent scrolling issues */
 }
 
 @keyframes gradientAnimation {
@@ -43,205 +44,31 @@ body {
     margin-bottom: 50px; /* Add space for footer */
 }
 
-/* Header styling */
-h1 {
-    font-size: 2.5rem;
-    margin-bottom: 30px; /* Increased spacing for breathing room */
-}
-
-/* General input container styling */
-.inputs {
-    margin-bottom: 25px; /* Increased space between input sections */
-}
-
-.inputs label {
-    font-size: 1.2rem; /* Slightly larger font for better readability */
-    margin-bottom: 8px; /* Increased spacing below labels */
-    display: block;
-}
-
-/* Input fields styling */
-.inputs input,
-.inputs select {
-    padding: 12px; /* Increased padding for a balanced look */
-    font-size: 1.2rem; /* Larger font for consistency */
-    font-weight: bold; /* Make input numbers bold */
-    border: 1px solid #555;
-    background-color: transparent; /* Fully transparent background */
-    color: white;
-    margin-bottom: 2.5px; /* More space between inputs */
-    border-radius: 15px;
-}
-
-/* Remove spinners on numeric inputs */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
-}
-
-/* Adjusting input fields for number of frames and time per frame */
-.inputs input {
-    width: 160px; /* Slightly wider input fields */
-    text-align: center; /* Center align the text inside inputs */
-}
-
-/* Flexbox container for time per frame input and unit display */
-.time-input-container {
-    display: flex;
-    justify-content: center; /* Center-align the entire group */
-    align-items: center; /* Vertically align elements */
-    gap: 15px; /* Increased gap for better spacing */
-    width: 100%; /* Ensure full container width */
-    position: relative; /* Enable absolute positioning for adjustments */
-}
-
-/* Styling for the input field */
-.time-input-container input {
-    width: 160px; /* Adjust width for visual consistency */
-    text-align: center; /* Center-align the input text */
-}
-
-/* Styling for the unit display (dropdown or text) */
-#timeUnitDisplay {
-    font-size: 1.2rem; /* Slightly larger text for visibility */
-    padding: 6px;
-    cursor: pointer;
-    background-color: transparent;
-    border-radius: 10px;
-    color: white;
+/* Footer styling */
+footer {
+    font-size: 0.8rem;
+    color: #aaa;
     text-align: center;
-    width: 40px; /* Adjusted width for proportion */
-    position: absolute; /* Position the dropdown */
-    right: 0; /* Align it to the far right of the container */
-    transform: translateX(-20px); /* Adjusted spacing for alignment */
+    padding: 10px 0; /* Add some padding for visual spacing */
+    position: fixed; /* Fixed at the bottom of the screen */
+    bottom: env(safe-area-inset-bottom, 0); /* Safe area inset for iPhones */
+    width: 100%;
+    background-color: transparent; /* Transparent to blend seamlessly */
 }
 
-#timeUnitDisplay:hover {
-    background-color: #444;
-}
-
-/* Timer display */
-.timer p {
-    font-size: 5.5rem;
-    margin-top: 40px; /* Increased margin above the timer */
-    margin-bottom: 40px; /* Added margin below the timer for consistent spacing */
-    transition: font-size 0.3s ease; /* Smooth transition between font size changes */
-}
-
-/* Controls container styling */
-.controls {
-    display: flex;
-    justify-content: center;
-    gap: 25px; /* Wider gap between buttons for visual balance */
-    margin-top: 40px; /* More space above buttons to balance with the timer */
-}
-
-/* Button styling */
-.controls button {
-    background-color: transparent; /* Fully transparent background */
-    color: white;
-    border: 1px solid #555;
-    padding: 10px 20px; /* Adjusted padding for a smaller, more compact button */
-    font-size: 1.4rem; /* Button text font size */
-    cursor: pointer;
-    width: auto; /* Adjust width to content */
-    border-radius: 15px;
-    transition: background-color 0.3s;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
-.controls button i {
-    font-size: 1.4rem; /* Adjust icon size for better appearance */
-}
-
-.controls button:hover {
-    background-color: rgba(51, 51, 51, 0.5); /* Add a slight background on hover */
-}
-
-.controls button:disabled {
-    background-color: #555;
-    cursor: not-allowed;
-}
-
-/* Remove the arrow from the select dropdown if used */
-#timeUnit {
-    -webkit-appearance: none; /* Chrome, Safari */
-    -moz-appearance: none;    /* Firefox */
-    -ms-appearance: none;     /* Internet Explorer */
-    appearance: none;         /* Standard syntax */
-}
-
-/* Hide the select dropdown visually (if needed) */
-.hidden {
-    display: none;
-}
-
-/* Safe area handling for iPhone X and newer */
-body {
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-top: env(safe-area-inset-top);
-}
-
-/* Ensuring full height on mobile */
+/* Adjust body padding to account for iPhone safe areas */
 html, body {
     height: 100%;
-}
-
-/* Finish time display */
-#finishTimeDisplay {
-    font-size: 1.2rem;
-    margin-top: 20px;
-    text-align: center;
-    color: #aaa;
-}
-
-/* Countdown timer font-size adjustments */
-#timerDisplay {
-    white-space: nowrap; /* Prevents the timer text from wrapping */
-    overflow: hidden; /* Hide overflow if the text is too large */
-    text-overflow: ellipsis; /* Add ellipsis when text overflows */
-    display: inline-block; /* Keeps the timer in one line */
-    transition: font-size 0.3s ease; /* Smooth transition between font size changes */
-}
-
-/* Adjust font size based on the length of the countdown */
-.timer p {
-    font-size: 5rem; /* Default font size */
-}
-
-/* Adjust font size for smaller countdown */
-.timer p {
-    font-size: 6rem; /* Larger font size for normal countdown */
+    margin: 0;
+    padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0);
 }
 
 /* Responsive design for small screens */
 @media (max-width: 600px) {
-    #timerDisplay {
-        font-size: 5vw; /* Adjust font size for smaller screens */
-    }
-    /* Smaller elements and more compact layout */
     .container {
         padding: 30px;
     }
     h1 {
         font-size: 2rem;
     }
-}
-
-/* Footer styling */
-footer {
-    font-size: 0.1rem;
-    color: #aaa;
-    text-align: center;
-    padding: 10px 0; /* Add some padding for visual spacing */
-    position: fixed; /* Fixed at the bottom of the screen */
-    bottom: 0;
-    width: 100%;
 }
