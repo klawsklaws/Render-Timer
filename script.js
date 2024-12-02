@@ -104,8 +104,12 @@ function updateDisplay(time) {
     let currentDate = new Date();
     let finishDate = new Date(finishTime);
 
+    // Resetting the time part to midnight to compare only the dates
+    currentDate.setHours(0, 0, 0, 0);
+    finishDate.setHours(0, 0, 0, 0);
+
     // Display finish time correctly
-    if (finishDate.toDateString() === currentDate.toDateString()) {
+    if (finishDate.getTime() === currentDate.getTime()) {
         // If finish time is today
         finishTimeDisplay.textContent = `Finish time: ${hoursFinish}:${minutesFinish.toString().padStart(2, '0')} ${timeSuffix}`;
         finishTimeDisplay.style.display = 'block';
