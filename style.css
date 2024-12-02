@@ -220,7 +220,7 @@ html, body {
     /* Smaller elements and more compact layout */
     .container {
         padding: 30px;
-        margin-top: 20vh; /* Increased vertical margin to raise the container */
+        margin-top: 5vh; /* Increased vertical margin to raise the container */
     }
     h1 {
         font-size: 2rem;
