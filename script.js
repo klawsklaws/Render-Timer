@@ -1,23 +1,23 @@
 let framesInput = document.getElementById('frames');
 let timeInput = document.getElementById('time');
-let timeUnitDisplay = document.getElementById('timeUnitDisplay');  // This is the span now
+let timeUnitDisplay = document.getElementById('timeUnitDisplay');
 let startPauseButton = document.getElementById('startPauseButton');
 let stopButton = document.getElementById('stopButton');
 let timerDisplay = document.getElementById('timerDisplay');
+let finishTimeDisplay = document.getElementById('finishTimeDisplay');
 let remainingTime;
 let timer;
 let isRunning = false;
-let isPaused = false;
 let currentUnit = 'seconds';  // Default to seconds
 
 // Toggle between "S" and "M" when the user clicks the unit display
 function toggleUnit() {
     if (currentUnit === 'seconds') {
         currentUnit = 'minutes';
-        timeUnitDisplay.textContent = 'M';  // Show minutes
+        timeUnitDisplay.textContent = 'M'; // Show minutes
     } else {
         currentUnit = 'seconds';
-        timeUnitDisplay.textContent = 'S';  // Show seconds
+        timeUnitDisplay.textContent = 'S'; // Show seconds
     }
 }
 
@@ -43,12 +43,10 @@ function startTimer() {
         totalTimeInSeconds *= 3600;
     }
 
-    remainingTime = totalTimeInSeconds * framesInput.value; // Multiply by number of frames
+    remainingTime = totalTimeInSeconds * framesInput.value;
 
     isRunning = true;
-    isPaused = false;
-
-    startPauseButton.innerHTML = '<i class="fas fa-pause"></i>'; // Show pause icon
+    startPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
     stopButton.disabled = false;
     startPauseButton.disabled = false;
 
@@ -57,12 +55,11 @@ function startTimer() {
             clearInterval(timer);
             isRunning = false;
             updateDisplay(remainingTime);
-            startPauseButton.innerHTML = '<i class="fas fa-play"></i>'; // Show play icon
+            startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
             stopButton.disabled = true;
         } else {
             remainingTime -= 1;
             updateDisplay(remainingTime);
-            updateFinishTimeDisplay(); // Update the finish time display
         }
     }, 1000);
 }
@@ -70,17 +67,15 @@ function startTimer() {
 function pauseTimer() {
     clearInterval(timer);
     isRunning = false;
-    isPaused = true;
-    startPauseButton.innerHTML = '<i class="fas fa-play"></i>'; // Show play icon
+    startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
 }
 
 function stopTimer() {
     clearInterval(timer);
     isRunning = false;
-    isPaused = false;
     remainingTime = 0;
     updateDisplay(remainingTime);
-    startPauseButton.innerHTML = '<i class="fas fa-play"></i>'; // Show play icon
+    startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
     stopButton.disabled = true;
 }
 
@@ -98,43 +93,25 @@ function updateDisplay(time) {
     }
 
     timerDisplay.style.display = 'block';
-}
 
-function updateFinishTimeDisplay() {
+    // Calculate finish time
+    let finishTime = new Date(Date.now() + remainingTime * 1000); // Convert seconds to milliseconds
+    let hoursFinish = finishTime.getHours();
+    let minutesFinish = finishTime.getMinutes();
+    let timeSuffix = hoursFinish >= 12 ? 'PM' : 'AM';
+    hoursFinish = hoursFinish % 12 || 12; // Convert to 12-hour format
+
     let currentDate = new Date();
-    let finishTimeInMillis = currentDate.getTime() + remainingTime * 1000; // Convert seconds to milliseconds
-    let finishDate = new Date(finishTimeInMillis);
+    let finishDate = finishTime;
 
-    // Get current date components (day, month, year) for comparison
-    let currentDay = currentDate.getDate();
-    let currentMonth = currentDate.getMonth();
-    let currentYear = currentDate.getFullYear();
-
-    // Get finish date components (day, month, year) for comparison
-    let finishDay = finishDate.getDate();
-    let finishMonth = finishDate.getMonth();
-    let finishYear = finishDate.getFullYear();
-
-    let hours = finishDate.getHours();
-    let minutes = finishDate.getMinutes();
-    let seconds = finishDate.getSeconds();
-
-    let finishTimeDisplay = document.getElementById("finishTimeDisplay");
-
-    // Convert to 12-hour format with AM/PM
-    let timeSuffix = hours >= 12 ? 'PM' : 'AM';
-    hours = hours % 12;
-    if (hours === 0) hours = 12; // Handle midnight and noon
-
-    // Check if the finish time is today or tomorrow
-    if (currentYear === finishYear && currentMonth === finishMonth && currentDay === finishDay) {
-        // Finish Time Today
-        finishTimeDisplay.textContent = `Finish Time: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${timeSuffix}`;
-    } else if (currentYear === finishYear && currentMonth === finishMonth && currentDay + 1 === finishDay) {
-        // Finish Time Tomorrow
-        finishTimeDisplay.textContent = `Finish Time (Tomorrow): ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${timeSuffix}`;
+    // Display finish time correctly
+    if (finishDate.toDateString() === currentDate.toDateString()) {
+        // If finish time is today
+        finishTimeDisplay.textContent = `Finish time: ${hoursFinish}:${minutesFinish.toString().padStart(2, '0')} ${timeSuffix}`;
+        finishTimeDisplay.style.display = 'block';
     } else {
-        // For cases where the finish time is in the future
-        finishTimeDisplay.textContent = `Finish Time: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${timeSuffix}`;
+        // If finish time is tomorrow
+        finishTimeDisplay.textContent = `Finish time: ${hoursFinish}:${minutesFinish.toString().padStart(2, '0')} ${timeSuffix} (Tomorrow)`;
+        finishTimeDisplay.style.display = 'block';
     }
 }
