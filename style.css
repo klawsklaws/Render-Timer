@@ -229,7 +229,7 @@ html, body {
         gap: 20px; /* Reduced gap between inputs and button */
     }
     footer {
-        font-size: 1rem; /* Adjusted font size for footer on mobile */
+        font-size: 0.7rem; /* Adjusted font size for footer on mobile */
         padding: 15px 0; /* Adjust padding for better spacing */
     }
 }
