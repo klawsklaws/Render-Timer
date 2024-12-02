@@ -105,9 +105,15 @@ function updateFinishTimeDisplay() {
     let finishTimeInMillis = currentDate.getTime() + remainingTime * 1000; // Convert seconds to milliseconds
     let finishDate = new Date(finishTimeInMillis);
 
-    // Get current date and finish date for comparison
-    let currentDay = currentDate.toDateString();
-    let finishDay = finishDate.toDateString();
+    // Get current date components (day, month, year) for comparison
+    let currentDay = currentDate.getDate();
+    let currentMonth = currentDate.getMonth();
+    let currentYear = currentDate.getFullYear();
+
+    // Get finish date components (day, month, year) for comparison
+    let finishDay = finishDate.getDate();
+    let finishMonth = finishDate.getMonth();
+    let finishYear = finishDate.getFullYear();
 
     let hours = finishDate.getHours();
     let minutes = finishDate.getMinutes();
@@ -121,11 +127,14 @@ function updateFinishTimeDisplay() {
     if (hours === 0) hours = 12; // Handle midnight and noon
 
     // Check if the finish time is today or tomorrow
-    if (currentDay === finishDay) {
-        // Today
+    if (currentYear === finishYear && currentMonth === finishMonth && currentDay === finishDay) {
+        // Finish Time Today
         finishTimeDisplay.textContent = `Finish Time: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${timeSuffix}`;
-    } else {
-        // Tomorrow
+    } else if (currentYear === finishYear && currentMonth === finishMonth && currentDay + 1 === finishDay) {
+        // Finish Time Tomorrow
         finishTimeDisplay.textContent = `Finish Time (Tomorrow): ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${timeSuffix}`;
+    } else {
+        // For cases where the finish time is in the future
+        finishTimeDisplay.textContent = `Finish Time: ${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')} ${timeSuffix}`;
     }
 }
