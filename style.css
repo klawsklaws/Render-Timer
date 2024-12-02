@@ -8,7 +8,7 @@
 body {
     font-family: Myriad Pro Semibold, sans-serif;
     background: linear-gradient(45deg, #1c0818, #121214, #2a2c30); /* Initial gradient */
-    background-size: 400% 400%; /* Default gradient size */
+    background-size: 400% 400%; /* Make the gradient large enough to animate */
     animation: gradientAnimation 10s ease infinite; /* Apply the animation */
     color: white;
     display: flex;
@@ -19,7 +19,6 @@ body {
     padding: 20px;
 }
 
-/* Default Gradient Animation */
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
@@ -32,19 +31,11 @@ body {
     }
 }
 
-/* Media Query for mobile screens (portrait iPhone and similar devices) */
-@media (max-width: 767px) and (orientation: portrait) {
-    body {
-        background-size: 800% 800%; /* Increase the size of the gradient for better visibility */
-        animation: gradientAnimation 6s ease infinite; /* Speed up the animation */
-    }
-}
-
 /* Main container styling */
 .container {
     max-width: 400px;
     width: 100%;
-    background-color: rgba(29, 29, 29, 0.7);  /* Dark background with 70% opacity */
+    background-color: rgba(29, 29, 29, 0.3);  /* Dark background with 80% opacity */
     border-radius: 30px;
     padding: 40px 30px; /* Adjusted padding for better spacing */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -56,48 +47,9 @@ h1 {
     margin-bottom: 30px; /* Increased spacing for breathing room */
 }
 
-/* Scroll wheel container */
-.scroll-wheel {
-    height: 150px; /* Fixed height for the scroll area */
-    overflow-y: scroll; /* Enable vertical scrolling */
-    margin-bottom: 20px; /* Space below the scroll wheel */
-    border-radius: 15px;
-    border: 1px solid #555;
-    background-color: rgba(0, 0, 0, 0.5); /* Subtle background for contrast */
-    scrollbar-width: thin; /* For Firefox */
-    scrollbar-color: #555 transparent; /* Styled scrollbar for Firefox */
-}
-
-/* Hide default scrollbar for Chrome, Safari, and Edge */
-.scroll-wheel::-webkit-scrollbar {
-    width: 8px; /* Width of the scrollbar */
-}
-.scroll-wheel::-webkit-scrollbar-thumb {
-    background-color: #555; /* Scroll thumb color */
-    border-radius: 10px; /* Rounded scrollbar */
-}
-.scroll-wheel::-webkit-scrollbar-track {
-    background-color: transparent; /* Transparent track */
-}
-
-/* Individual scroll options */
-.option {
-    font-size: 1.5rem; /* Larger text for readability */
-    padding: 10px 0; /* Spacing around options */
-    text-align: center;
-    color: white; /* Default text color */
-    user-select: none; /* Prevent text selection */
-}
-
-/* Highlight selected option */
-.option:hover,
-.option:focus {
-    color: yellow; /* Highlighted color for selected option */
-}
-
 /* General input container styling */
 .inputs {
-    margin-bottom: 30px; /* Increased space between input sections */
+    margin-bottom: 25px; /* Increased space between input sections */
 }
 
 .inputs label {
@@ -117,8 +69,6 @@ h1 {
     color: white;
     margin-bottom: 2.5px; /* More space between inputs */
     border-radius: 15px;
-    width: 100%; /* Full width for inputs */
-    text-align: center; /* Center-align text inside inputs */
 }
 
 /* Remove spinners on numeric inputs */
@@ -132,6 +82,12 @@ input[type="number"] {
     -moz-appearance: textfield; /* Firefox */
 }
 
+/* Adjusting input fields for number of frames and time per frame */
+.inputs input {
+    width: 160px; /* Slightly wider input fields */
+    text-align: center; /* Center align the text inside inputs */
+}
+
 /* Flexbox container for time per frame input and unit display */
 .time-input-container {
     display: flex;
@@ -140,6 +96,12 @@ input[type="number"] {
     gap: 15px; /* Increased gap for better spacing */
     width: 100%; /* Ensure full container width */
     position: relative; /* Enable absolute positioning for adjustments */
+}
+
+/* Styling for the input field */
+.time-input-container input {
+    width: 160px; /* Adjust width for visual consistency */
+    text-align: center; /* Center-align the input text */
 }
 
 /* Styling for the unit display (dropdown or text) */
@@ -166,6 +128,11 @@ input[type="number"] {
     font-size: 5.5rem;
     margin-top: 40px; /* Increased margin above the timer */
     margin-bottom: 40px; /* Added margin below the timer for consistent spacing */
+}
+
+/* General input container styling */
+.inputs {
+    margin-bottom: 30px; /* Increased space between input sections */
 }
 
 /* Controls container styling */
@@ -205,13 +172,15 @@ input[type="number"] {
     cursor: not-allowed;
 }
 
-/* Safe area handling for iPhone X and newer */
-body {
-    padding-bottom: env(safe-area-inset-bottom);
-    padding-top: env(safe-area-inset-top);
+/* Remove the arrow from the select dropdown if used */
+#timeUnit {
+    -webkit-appearance: none; /* Chrome, Safari */
+    -moz-appearance: none;    /* Firefox */
+    -ms-appearance: none;     /* Internet Explorer */
+    appearance: none;         /* Standard syntax */
 }
 
-/* Ensuring full height on mobile */
-html, body {
-    height: 100%;
+/* Hide the select dropdown visually (if needed) */
+.hidden {
+    display: none;
 }
