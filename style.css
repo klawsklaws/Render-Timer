@@ -35,7 +35,7 @@ body {
 .container {
     max-width: 400px;
     width: 100%;
-    background-color: rgba(29, 29, 29, 0.3);  /* Dark background with 80% opacity */
+    background-color: rgba(29, 29, 29, 0.7);  /* Dark background with 70% opacity */
     border-radius: 30px;
     padding: 40px 30px; /* Adjusted padding for better spacing */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -183,4 +183,15 @@ input[type="number"] {
 /* Hide the select dropdown visually (if needed) */
 .hidden {
     display: none;
+}
+
+/* Safe area handling for iPhone X and newer */
+body {
+    padding-bottom: env(safe-area-inset-bottom);
+    padding-top: env(safe-area-inset-top);
+}
+
+/* Ensuring full height on mobile */
+html, body {
+    height: 100%;
 }
