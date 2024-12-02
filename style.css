@@ -41,6 +41,8 @@ body {
     padding: 40px 30px; /* Adjusted padding for better spacing */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     margin-bottom: 50px; /* Add space for footer */
+    position: relative;
+    z-index: 2;
 }
 
 /* Header styling */
@@ -73,17 +75,6 @@ h1 {
     border-radius: 15px;
 }
 
-/* Remove spinners on numeric inputs */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield; /* Firefox */
-}
-
 /* Adjusting input fields for number of frames and time per frame */
 .inputs input {
     width: 160px; /* Slightly wider input fields */
@@ -95,7 +86,7 @@ input[type="number"] {
     display: flex;
     justify-content: center; /* Center-align the entire group */
     align-items: center; /* Vertically align elements */
-    gap: 15px; /* Increased gap for better spacing */
+    gap: 25px; /* Increased gap for better spacing */
     width: 100%; /* Ensure full container width */
     position: relative; /* Enable absolute positioning for adjustments */
 }
@@ -229,15 +220,23 @@ html, body {
     /* Smaller elements and more compact layout */
     .container {
         padding: 30px;
+        margin-top: 10vh; /* Add some vertical margin for better positioning on phones */
     }
     h1 {
         font-size: 2rem;
+    }
+    .time-input-container {
+        gap: 20px; /* Reduced gap between inputs and button */
+    }
+    footer {
+        font-size: 1rem; /* Adjusted font size for footer on mobile */
+        padding: 15px 0; /* Adjust padding for better spacing */
     }
 }
 
 /* Footer styling */
 footer {
-    font-size: 0.1rem;
+    font-size: 0.8rem;
     color: #aaa;
     text-align: center;
     padding: 10px 0; /* Add some padding for visual spacing */
