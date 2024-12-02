@@ -7,7 +7,7 @@
 
 body {
     font-family: Myriad Pro Semibold, sans-serif;
-    background: linear-gradient(45deg, #f12711, #121214, #2a2c30); /* Initial gradient */
+    background: linear-gradient(45deg, #1c0818, #121214, #2a2c30); /* Initial gradient */
     background-size: 400% 400%; /* Make the gradient large enough to animate */
     animation: gradientAnimation 10s ease infinite; /* Apply the animation */
     color: white;
@@ -128,6 +128,7 @@ input[type="number"] {
     font-size: 5.5rem;
     margin-top: 40px; /* Increased margin above the timer */
     margin-bottom: 40px; /* Added margin below the timer for consistent spacing */
+    transition: font-size 0.3s ease; /* Smooth transition between font size changes */
 }
 
 /* Controls container styling */
@@ -197,4 +198,37 @@ html, body {
     margin-top: 20px;
     text-align: center;
     color: #aaa;
+}
+
+/* Countdown timer font-size adjustments */
+#timerDisplay {
+    white-space: nowrap; /* Prevents the timer text from wrapping */
+    overflow: hidden; /* Hide overflow if the text is too large */
+    text-overflow: ellipsis; /* Add ellipsis when text overflows */
+    display: inline-block; /* Keeps the timer in one line */
+    transition: font-size 0.3s ease; /* Smooth transition between font size changes */
+}
+
+/* Adjust font size based on the length of the countdown */
+.timer p {
+    font-size: 5rem; /* Default font size */
+}
+
+/* Adjust font size for smaller countdown */
+.timer p {
+    font-size: 6rem; /* Larger font size for normal countdown */
+}
+
+/* Responsive design for small screens */
+@media (max-width: 600px) {
+    #timerDisplay {
+        font-size: 5vw; /* Adjust font size for smaller screens */
+    }
+    /* Smaller elements and more compact layout */
+    .container {
+        padding: 30px;
+    }
+    h1 {
+        font-size: 2rem;
+    }
 }
