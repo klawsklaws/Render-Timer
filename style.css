@@ -125,7 +125,7 @@ input[type="number"] {
 
 /* Timer display */
 .timer p {
-    font-size: 1vw;
+    font-size: 5.5rem;
     margin-top: 40px; /* Increased margin above the timer */
     margin-bottom: 40px; /* Added margin below the timer for consistent spacing */
     transition: font-size 0.3s ease; /* Smooth transition between font size changes */
@@ -144,10 +144,10 @@ input[type="number"] {
     background-color: transparent; /* Fully transparent background */
     color: white;
     border: 1px solid #555;
-    padding: 15px 20px; /* Adjusted padding for a better feel */
-    font-size: 1.4rem; /* Consistent button font size */
+    padding: 10px 20px; /* Adjusted padding for a smaller, more compact button */
+    font-size: 1.4rem; /* Button text font size */
     cursor: pointer;
-    width: 45%; /* Adjust width of buttons */
+    width: auto; /* Adjust width to content */
     border-radius: 15px;
     transition: background-color 0.3s;
     display: flex;
@@ -156,7 +156,7 @@ input[type="number"] {
 }
 
 .controls button i {
-    font-size: 1.2rem; /* Slightly larger icons */
+    font-size: 1.4rem; /* Adjust icon size for better appearance */
 }
 
 .controls button:hover {
@@ -211,18 +211,18 @@ html, body {
 
 /* Adjust font size based on the length of the countdown */
 .timer p {
-    font-size: 1rem; /* Default font size */
+    font-size: 5rem; /* Default font size */
 }
 
 /* Adjust font size for smaller countdown */
 .timer p {
-    font-size: 1rem; /* Larger font size for normal countdown */
+    font-size: 6rem; /* Larger font size for normal countdown */
 }
 
 /* Responsive design for small screens */
 @media (max-width: 600px) {
     #timerDisplay {
-        font-size: 1vw; /* Adjust font size for smaller screens */
+        font-size: 5vw; /* Adjust font size for smaller screens */
     }
     /* Smaller elements and more compact layout */
     .container {
