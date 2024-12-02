@@ -67,6 +67,17 @@
         startPauseButton.addEventListener('click', toggleTimer);
         stopButton.addEventListener('click', stopTimer);
 
+        // Add a keydown event listener to the timeInput field to trigger the start when Enter is pressed
+        timeInput.addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                // Prevent the default action of the Enter key (form submission or other actions)
+                event.preventDefault();
+                
+                // Trigger the start of the timer when Enter is pressed
+                toggleTimer();
+            }
+        });
+
         function toggleTimer() {
             if (isRunning) {
                 pauseTimer();
@@ -146,11 +157,11 @@
             let hoursFinish = finishTime.getHours();
             let minutesFinish = finishTime.getMinutes();
             let dayOfWeek = finishTime.toLocaleString('en-US', { weekday: 'long' });
-            let timeSuffix = hoursFinish >= 12 ? 'PM' : 'AM';
-            hoursFinish = hoursFinish % 12 || 12; // Convert to 12-hour format
+            hoursFinish = hoursFinish % 24; // Ensure 24-hour format
 
+            let displayText = `Finish Time: ${hoursFinish}:${minutesFinish.toString().padStart(2, '0')}`;
+            
             if (finishTime.getDate() !== new Date().getDate()) {
-                let displayText = `Finish time: ${hoursFinish}:${minutesFinish.toString().padStart(2, '0')} ${timeSuffix}`;
                 if (finishTime.getDate() > new Date().getDate()) {
                     let futureDate = finishTime.toLocaleDateString();
                     if (finishTime.getDay() === (new Date()).getDay() + 1) {
@@ -159,11 +170,10 @@
                         displayText += ` (${dayOfWeek})`;
                     }
                 }
-                finishTimeDisplay.textContent = displayText;
-                finishTimeDisplay.style.display = 'block';
-            } else {
-                finishTimeDisplay.style.display = 'none';
             }
+            
+            finishTimeDisplay.textContent = displayText;
+            finishTimeDisplay.style.display = 'block';
         }
     </script>
 </body>
