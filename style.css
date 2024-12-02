@@ -192,7 +192,7 @@ html, body {
 }
 
 /* Finish time display */
-.finish-time {
+#finishTimeDisplay {
     font-size: 1.2rem;
     margin-top: 20px;
     text-align: center;
