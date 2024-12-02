@@ -109,13 +109,13 @@ function updateDisplay(time) {
     }
 
     // Dynamically adjust font size to prevent dots
-    let fontSize = 5.5; // Default font size
+    let fontSize = 5; // Default font size
     if (remainingTime > 3600) {
-        fontSize = 3.5; // Smaller font size for large times (e.g., > 1 hour)
+        fontSize = 3; // Smaller font size for large times (e.g., > 1 hour)
     } else if (remainingTime > 1800) {
-        fontSize = 4.5; // Slightly smaller font for mid-range times
+        fontSize = 4; // Slightly smaller font for mid-range times
     } else if (remainingTime > 600) {
-        fontSize = 5; // Moderate font for reasonable times
+        fontSize = 4.5; // Moderate font for reasonable times
     }
 
     // Apply the font size dynamically
