@@ -8,8 +8,8 @@
 body {
     font-family: Myriad Pro Semibold, sans-serif;
     background: linear-gradient(45deg, #1c0818, #121214, #2a2c30); /* Initial gradient */
-    background-size: 400% 400%; /* Make the gradient large enough to animate */
-    animation: gradientAnimation 10s ease infinite; /* Apply the animation */
+    background-size: 400% 400%; /* Default gradient size */
+    animation: gradientAnimation 10s ease infinite; /* Apply animation */
     color: white;
     display: flex;
     justify-content: center;
@@ -19,6 +19,7 @@ body {
     padding: 20px;
 }
 
+/* Default Gradient Animation */
 @keyframes gradientAnimation {
     0% {
         background-position: 0% 50%;
@@ -31,11 +32,20 @@ body {
     }
 }
 
+/* Media Query for mobile screens (portrait iPhone and similar devices) */
+@media (max-width: 767px) and (orientation: portrait) {
+    body {
+        background-size: 300% 300%; /* Reduce size for compact variations */
+        animation: gradientAnimation 6s ease infinite; /* Faster animation */
+        background: linear-gradient(45deg, #1c0818, #3a1e3f, #2a2c30); /* Add more contrast to colors */
+    }
+}
+
 /* Main container styling */
 .container {
     max-width: 400px;
     width: 100%;
-    background-color: rgba(29, 29, 29, 0.7);  /* Dark background with 70% opacity */
+    background-color: rgba(29, 29, 29, 0.7); /* Dark background with 70% opacity */
     border-radius: 30px;
     padding: 40px 30px; /* Adjusted padding for better spacing */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
@@ -130,11 +140,6 @@ input[type="number"] {
     margin-bottom: 40px; /* Added margin below the timer for consistent spacing */
 }
 
-/* General input container styling */
-.inputs {
-    margin-bottom: 30px; /* Increased space between input sections */
-}
-
 /* Controls container styling */
 .controls {
     display: flex;
@@ -170,19 +175,6 @@ input[type="number"] {
 .controls button:disabled {
     background-color: #555;
     cursor: not-allowed;
-}
-
-/* Remove the arrow from the select dropdown if used */
-#timeUnit {
-    -webkit-appearance: none; /* Chrome, Safari */
-    -moz-appearance: none;    /* Firefox */
-    -ms-appearance: none;     /* Internet Explorer */
-    appearance: none;         /* Standard syntax */
-}
-
-/* Hide the select dropdown visually (if needed) */
-.hidden {
-    display: none;
 }
 
 /* Safe area handling for iPhone X and newer */
