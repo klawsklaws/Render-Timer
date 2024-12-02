@@ -1,41 +1,24 @@
-let framesInput = document.getElementById('frames'); // Keeping for manual fallback
+let framesInput = document.getElementById('frames');
 let timeInput = document.getElementById('time');
-let timeUnitDisplay = document.getElementById('timeUnitDisplay'); // Span for unit display
+let timeUnitDisplay = document.getElementById('timeUnitDisplay');  // This is the span now
 let startPauseButton = document.getElementById('startPauseButton');
 let stopButton = document.getElementById('stopButton');
 let timerDisplay = document.getElementById('timerDisplay');
-let scrollWheel = document.querySelector('.scroll-wheel'); // The scrollable container
-let options = document.querySelectorAll('.option');
-
 let remainingTime;
 let timer;
 let isRunning = false;
 let isPaused = false;
-let currentUnit = 'seconds'; // Default to seconds
-let selectedFrames = 250; // Default frames value
 
-// Sync scroll wheel selection with the number of frames
-scrollWheel.addEventListener('scroll', () => {
-    const center = scrollWheel.offsetHeight / 2 + scrollWheel.scrollTop;
-    options.forEach(option => {
-        const optionCenter = option.offsetTop + option.offsetHeight / 2;
-        if (Math.abs(optionCenter - center) < option.offsetHeight / 2) {
-            option.style.color = 'yellow'; // Highlight selected option
-            selectedFrames = parseInt(option.textContent); // Update the selected number of frames
-        } else {
-            option.style.color = 'white'; // Reset others
-        }
-    });
-});
+let currentUnit = 'seconds';  // Default to seconds
 
 // Toggle between "S" and "M" when the user clicks the unit display
 function toggleUnit() {
     if (currentUnit === 'seconds') {
         currentUnit = 'minutes';
-        timeUnitDisplay.textContent = 'M'; // Show minutes
+        timeUnitDisplay.textContent = 'M';  // Show minutes
     } else {
         currentUnit = 'seconds';
-        timeUnitDisplay.textContent = 'S'; // Show seconds
+        timeUnitDisplay.textContent = 'S';  // Show seconds
     }
 }
 
@@ -57,9 +40,11 @@ function startTimer() {
     // Convert time to seconds based on the selected unit
     if (currentUnit === 'minutes') {
         totalTimeInSeconds *= 60;
+    } else if (currentUnit === 'hours') {
+        totalTimeInSeconds *= 3600;
     }
 
-    remainingTime = totalTimeInSeconds * selectedFrames; // Multiply by selected frames
+    remainingTime = totalTimeInSeconds * framesInput.value; // Multiply by number of frames
 
     isRunning = true;
     isPaused = false;
