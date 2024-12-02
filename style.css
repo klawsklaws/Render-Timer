@@ -49,7 +49,7 @@ body {
 /* Footer styling */
 footer {
     font-size: 0.8rem; /* Small text size for footer */
-    color: #aaa;
+    color: transparent;
     text-align: center;
     padding: 10px 0;
     position: absolute; /* Position footer at the bottom */
