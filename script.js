@@ -108,6 +108,16 @@ function updateDisplay(time) {
         timerDisplay.textContent = `${seconds}`;
     }
 
+    // Dynamically adjust font size
+    let fontSize = 5.5; // Default font size
+    if (remainingTime > 3600) {
+        fontSize = 4.5; // Smaller font size for large times (e.g., > 1 hour)
+    } else if (remainingTime > 1800) {
+        fontSize = 5; // Slightly smaller font for mid-range times
+    }
+
+    timerDisplay.style.fontSize = `${fontSize}rem`; // Adjust font size
+
     timerDisplay.style.display = 'block';
 
     // Calculate the finish time
@@ -122,7 +132,10 @@ function updateDisplay(time) {
     if (finishTime.getDate() !== new Date().getDate()) {
         if (finishTime.getDate() > new Date().getDate()) {
             let futureDate = finishTime.toLocaleDateString();
-            if (finishTime.getDay() === (new Date()).getDay() + 1) {
+            if (finishTime.getDate() > new Date().getDate() + 7) {
+                // Show date if finish time is more than 7 days ahead
+                displayText += ` on ${futureDate}`;
+            } else if (finishTime.getDay() === (new Date()).getDay() + 1) {
                 displayText += ` (Tomorrow)`;
             } else {
                 displayText += ` (${dayOfWeek})`;
