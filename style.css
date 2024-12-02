@@ -35,13 +35,13 @@ body {
 /* Main container styling */
 .container {
     max-width: 400px;
-    width: 90%; /* Use percentage for responsive width */
+    width: 90%; /* Relative width for better responsiveness */
     background-color: rgba(29, 29, 29, 0.7);
     border-radius: 30px;
     padding: 40px 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     margin-bottom: 50px;
-    box-sizing: border-box; /* Ensure padding doesn't break layout */
+    box-sizing: border-box;
 }
 
 /* Header styling */
@@ -64,56 +64,51 @@ h1 {
 /* Input fields styling */
 .inputs input,
 .inputs select {
-    width: 100%; /* Full width for responsiveness */
+    width: 100%;
     padding: 12px;
     font-size: 1.2rem;
     font-weight: bold;
     border: 1px solid #555;
     background-color: transparent;
     color: white;
-    margin-bottom: 10px; /* Consistent spacing */
+    margin-bottom: 10px;
     border-radius: 15px;
     text-align: center;
-}
-
-/* Remove spinners on numeric inputs */
-input[type="number"]::-webkit-inner-spin-button,
-input[type="number"]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type="number"] {
-    -moz-appearance: textfield;
 }
 
 /* Flexbox container for time per frame input and unit display */
 .time-input-container {
     display: flex;
-    justify-content: center;
+    justify-content: space-between; /* Ensure proper spacing */
     align-items: center;
-    gap: 15px;
+    gap: 10px;
     width: 100%;
-    position: relative;
-    flex-wrap: wrap; /* Wrap for small screens */
 }
 
 /* Styling for the unit display */
 #timeUnitDisplay {
     font-size: 1.2rem;
-    padding: 6px;
-    cursor: pointer;
+    padding: 8px 10px;
     background-color: transparent;
+    border: 1px solid #555;
     border-radius: 10px;
     color: white;
     text-align: center;
-    width: auto;
-    position: static; /* Remove absolute positioning */
-    margin-top: 10px; /* Add space if wrapped */
+    flex-shrink: 0; /* Prevents shrinking */
+    min-width: 50px; /* Ensures the element doesn't collapse */
 }
 
 #timeUnitDisplay:hover {
     background-color: #444;
+}
+
+/* Styling for input field in time input container */
+.time-input-container input {
+    flex-grow: 1; /* Ensures the input field takes available space */
+    max-width: 160px; /* Prevents growing too large */
+    padding: 12px;
+    font-size: 1.2rem;
+    text-align: center;
 }
 
 /* Timer display */
@@ -130,7 +125,7 @@ input[type="number"] {
     justify-content: center;
     gap: 25px;
     margin-top: 40px;
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    flex-wrap: wrap;
 }
 
 .controls button {
