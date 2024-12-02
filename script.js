@@ -40,8 +40,6 @@ function startTimer() {
     // Convert time to seconds based on the selected unit
     if (currentUnit === 'minutes') {
         totalTimeInSeconds *= 60;
-    } else if (currentUnit === 'hours') {
-        totalTimeInSeconds *= 3600;
     }
 
     remainingTime = totalTimeInSeconds * framesInput.value; // Multiply by number of frames
