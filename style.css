@@ -229,7 +229,7 @@ html, body {
         gap: 20px; /* Reduced gap between inputs and button */
     }
     footer {
-        font-size: 0.7rem; /* Adjusted font size for footer on mobile */
+        font-size: 0.1rem; /* Adjusted font size for footer on mobile */
         padding: 15px 0; /* Adjust padding for better spacing */
     }
 }
@@ -248,7 +248,7 @@ footer {
 /* Responsive design for small screens */
 @media (max-width: 2000px) {
     footer {
-        font-size: 0.7rem; /* Smaller font size on mobile */
+        font-size: 0.1rem; /* Smaller font size on mobile */
         padding: 8px 0; /* Adjusted padding for better spacing */
     }
 }
