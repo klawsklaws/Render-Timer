@@ -211,18 +211,18 @@ html, body {
 
 /* Adjust font size based on the length of the countdown */
 .timer p {
-    font-size: 5rem; /* Default font size */
+    font-size: 1rem; /* Default font size */
 }
 
 /* Adjust font size for smaller countdown */
 .timer p {
-    font-size: 6rem; /* Larger font size for normal countdown */
+    font-size: 1rem; /* Larger font size for normal countdown */
 }
 
 /* Responsive design for small screens */
 @media (max-width: 600px) {
     #timerDisplay {
-        font-size: 5vw; /* Adjust font size for smaller screens */
+        font-size: 1vw; /* Adjust font size for smaller screens */
     }
     /* Smaller elements and more compact layout */
     .container {
