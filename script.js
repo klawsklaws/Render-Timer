@@ -1,14 +1,12 @@
 let framesInput = document.getElementById('frames');
 let timeInput = document.getElementById('time');
 let timeUnitDisplay = document.getElementById('timeUnitDisplay');
-let startPauseButton = document.getElementById('startPauseButton');
-let stopButton = document.getElementById('stopButton');
+let startButton = document.getElementById('startButton');
 let timerDisplay = document.getElementById('timerDisplay');
 let finishTimeDisplay = document.getElementById('finishTimeDisplay');
 let remainingTime;
 let timer;
 let isRunning = false;
-let isPaused = false;
 let currentUnit = 'seconds';  // Default to seconds
 
 // Toggle between "S" and "M" when the user clicks the unit display
@@ -22,24 +20,26 @@ function toggleUnit() {
     }
 }
 
-startPauseButton.addEventListener('click', toggleTimer);
-stopButton.addEventListener('click', stopTimer);
+// Start or restart the countdown
+startButton.addEventListener('click', toggleTimer);
 
-// Add a keydown event listener to the timeInput field to trigger the start when Enter is pressed
+// Update the timer display when input changes
+framesInput.addEventListener('input', updateTimerDisplay);
+timeInput.addEventListener('input', updateTimerDisplay);
+
+// Event listener for "Enter" key press to start countdown
 timeInput.addEventListener('keydown', function(event) {
     if (event.key === 'Enter') {
-        // Prevent the default action of the Enter key (form submission or other actions)
-        event.preventDefault();
-        
-        // Trigger the start of the timer when Enter is pressed
-        toggleTimer();
+        startTimer();  // Start the timer when "Enter" is pressed
     }
 });
 
 function toggleTimer() {
     if (isRunning) {
-        pauseTimer();
+        // If running, restart the timer
+        restartTimer();
     } else {
+        // If paused, start the timer
         startTimer();
     }
 }
@@ -51,26 +51,19 @@ function startTimer() {
     // Convert time to seconds based on the selected unit
     if (currentUnit === 'minutes') {
         totalTimeInSeconds *= 60;
-    } else if (currentUnit === 'hours') {
-        totalTimeInSeconds *= 3600;
     }
 
     remainingTime = totalTimeInSeconds * framesInput.value;
 
     isRunning = true;
-    isPaused = false;
-
-    startPauseButton.innerHTML = '<i class="fas fa-pause"></i>';
-    stopButton.disabled = false;
-    startPauseButton.disabled = false;
+    startButton.innerHTML = '<i class="fas fa-redo"></i>';  // Change button to "Restart" icon (redo)
 
     timer = setInterval(() => {
         if (remainingTime <= 0) {
             clearInterval(timer);
             isRunning = false;
             updateDisplay(remainingTime);
-            startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
-            stopButton.disabled = true;
+            startButton.innerHTML = '<i class="fas fa-play"></i>';  // Change button to "Start" icon
         } else {
             remainingTime -= 1;
             updateDisplay(remainingTime);
@@ -78,21 +71,29 @@ function startTimer() {
     }, 1000);
 }
 
-function pauseTimer() {
+function restartTimer() {
+    // Reset the timer to initial state
     clearInterval(timer);
     isRunning = false;
-    isPaused = true;
-    startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
+    startButton.innerHTML = '<i class="fas fa-play"></i>';  // Change button to "Start" icon
+    updateTimerDisplay();  // Update the display with new time
+    startTimer();  // Restart the timer
 }
 
-function stopTimer() {
-    clearInterval(timer);
-    isRunning = false;
-    isPaused = false;
-    remainingTime = 0;
-    updateDisplay(remainingTime);
-    startPauseButton.innerHTML = '<i class="fas fa-play"></i>';
-    stopButton.disabled = true;
+function updateTimerDisplay() {
+    let timePerFrame = parseFloat(timeInput.value);
+    let totalTimeInSeconds = timePerFrame;
+
+    // Convert time to seconds based on the selected unit
+    if (currentUnit === 'minutes') {
+        totalTimeInSeconds *= 60;
+    }
+
+    remainingTime = totalTimeInSeconds * framesInput.value;
+
+    if (!isRunning) {
+        updateDisplay(remainingTime);  // Update the display
+    }
 }
 
 function updateDisplay(time) {
