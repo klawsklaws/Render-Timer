@@ -125,7 +125,7 @@ input[type="number"] {
 
 /* Timer display */
 .timer p {
-    font-size: 5.5rem;
+    font-size: 5.5vw;
     margin-top: 40px; /* Increased margin above the timer */
     margin-bottom: 40px; /* Added margin below the timer for consistent spacing */
     transition: font-size 0.3s ease; /* Smooth transition between font size changes */
