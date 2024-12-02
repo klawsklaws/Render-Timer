@@ -7,7 +7,7 @@
 
 body {
     font-family: Myriad Pro Semibold, sans-serif;
-    background: linear-gradient(45deg, #23074d, #121214, #2a2c30); /* Initial gradient */
+    background: linear-gradient(45deg, #20002c, #121214, #2a2c30); /* Initial gradient */
     background-size: 400% 400%; /* Make the gradient large enough to animate */
     animation: gradientAnimation 10s ease infinite; /* Apply the animation */
     color: white;
