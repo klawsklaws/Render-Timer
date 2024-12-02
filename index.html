@@ -15,34 +15,26 @@
     <div class="container">
         <h1>Render Timer</h1>
 
-        <!-- Input for the number of frames -->
         <div class="inputs">
             <label for="frames">Number of Frames</label>
             <input type="number" id="frames" value="250" min="1">
         </div>
 
-        <!-- Input for the time per frame -->
         <div class="inputs">
-            <label for="time">Time per Frame</label>
+            <label for="time">Time per frame</label>
             <div class="time-input-container">
-                <!-- Number input for time -->
                 <input type="number" id="time" value="1" min="1" step="0.1">
-                <!-- Unit display with toggle functionality -->
                 <span id="timeUnitDisplay" class="unit-display" onclick="toggleUnit()">S</span>
             </div>
         </div>
 
-        <!-- Timer display -->
         <div class="timer">
-            <p id="timerDisplay" style="display:none;">0</p>
+            <p id="timerDisplay" style="display:none">0</p>
             <p id="finishTimeDisplay" style="font-size: 1.2rem; color: #fff; display:none;"></p>
         </div>
 
-        <!-- Control buttons -->
         <div class="controls">
-            <button id="startButton" title="Start Timer">
-                <i class="fas fa-play"></i>
-            </button>
+            <button id="startButton"><i class="fas fa-play"></i></button>
         </div>
     </div>
 
@@ -51,7 +43,6 @@
         <p>All Rights Reserved © 2025 Klaudijus Besarabovas - France</p>
     </footer>
 
-    <!-- JavaScript -->
     <script src="script.js"></script>
 </body>
 </html>
