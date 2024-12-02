@@ -108,15 +108,18 @@ function updateDisplay(time) {
         timerDisplay.textContent = `${seconds}`;
     }
 
-    // Dynamically adjust font size
+    // Dynamically adjust font size to prevent dots
     let fontSize = 5.5; // Default font size
     if (remainingTime > 3600) {
-        fontSize = 4.5; // Smaller font size for large times (e.g., > 1 hour)
+        fontSize = 3.5; // Smaller font size for large times (e.g., > 1 hour)
     } else if (remainingTime > 1800) {
-        fontSize = 5; // Slightly smaller font for mid-range times
+        fontSize = 4.5; // Slightly smaller font for mid-range times
+    } else if (remainingTime > 600) {
+        fontSize = 5; // Moderate font for reasonable times
     }
 
-    timerDisplay.style.fontSize = `${fontSize}rem`; // Adjust font size
+    // Apply the font size dynamically
+    timerDisplay.style.fontSize = `${fontSize}rem`; // Adjust font size to prevent overflow
 
     timerDisplay.style.display = 'block';
 
@@ -142,7 +145,7 @@ function updateDisplay(time) {
             }
         }
     }
-    
+
     finishTimeDisplay.textContent = displayText;
     finishTimeDisplay.style.display = 'block';
 }
